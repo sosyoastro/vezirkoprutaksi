@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vezirköprü Taksi – Next.js
 
-## Getting Started
+[vezirkoprutaksi.com](https://vezirkoprutaksi.com) sitesinin Next.js 16 sürümü. Tasarım, metinler, görseller ve blog yazıları canlı PHP sitesinden birebir taşındı.
 
-First, run the development server:
+## Çalıştırma
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # geliştirme: http://localhost:3000
+npm run build    # üretim derlemesi
+npm run start    # derlenmiş siteyi çalıştırır
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node.js 20.9 veya üstü gerekir.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## İçerik nasıl düzenlenir?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Bütün metinler tek dosyada: **`src/data/site.ts`**
 
-## Learn More
+- Telefon, adres, WhatsApp numarası, SEO başlığı/açıklaması → `site`
+- Slider başlıkları ve görselleri → `slides`
+- Hakkımızda, Neden Biz, Hizmetler, SSS → ilgili bölümler
+- **Yeni blog yazısı** → `blogPosts` dizisine yeni bir nesne ekleyin, görselini `public/uploads/` içine koyun. Sayfa (`/blog/<slug>`) ve site haritası otomatik oluşur.
 
-To learn more about Next.js, take a look at the following resources:
+## Yapı
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/app/page.tsx              Ana sayfa
+src/app/blog/page.tsx         Blog listesi
+src/app/blog/[slug]/page.tsx  Blog yazısı
+src/app/globals.css           Canlı sitenin style.css + blog.css dosyaları
+src/components/               Header, HeroSlider, Faq, Contact, Footer, bölümler
+src/data/site.ts              Tüm içerik
+public/uploads/               Görseller
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Canlı siteden farklar
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **İletişim formu** canlı sitede PHP (`ajax.php`) ile kaydediliyordu. Burada sunucu tarafı olmadığından form, yazılanları hazır mesaj olarak **WhatsApp**'a aktarır.
+- WhatsApp linkleri `wa.me/90543...` biçimine düzeltildi (eskisi ülke kodu olmadığı için çalışmıyordu).
+- "Rezervasyon" linkleri sayfada karşılığı olmayan bir bölüme gidiyordu; artık "Hemen Arayın" bandına gidiyor.
+- Eski adresler kalıcı olarak yönlendirilir: `index.php` → `/`, `blog.php` → `/blog`, `blog-detay.php?slug=...` → `/blog/...`
+- Yönetim paneli yok; içerik `src/data/site.ts` üzerinden düzenlenir.

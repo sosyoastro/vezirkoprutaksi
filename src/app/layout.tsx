@@ -1,31 +1,75 @@
-import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Vezirköprü 7/24 Acil Taksi | 0543 951 51 01",
-  description: "Vezirköprü'de 7/24 hızlı, konforlu ve güvenilir taksi hizmeti. Şehir içi ve şehirler arası transfer, havalimanı transferi.",
-  keywords: "vezirköprü taksi, vezirköprü acil taksi, samsun vezirköprü taksi, 7/24 taksi, vezirköprü nöbetçi taksi",
+  metadataBase: new URL(site.url),
+  title: { default: site.title, template: `%s - ${site.title}` },
+  description: site.description,
+  keywords: site.keywords,
+  robots: { index: true, follow: true },
+  icons: { icon: site.favicon },
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: "/",
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+    images: [site.ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+    images: [site.ogImage],
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  name: site.name,
+  url: `${site.url}/`,
+  telephone: site.phone,
+  image: `${site.url}${site.ogImage}`,
+  areaServed: "Vezirköprü, Samsun",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address,
+    addressLocality: "Vezirköprü",
+    addressRegion: "Samsun",
+    addressCountry: "TR",
+  },
+  openingHours: "Mo-Su 00:00-23:59",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased min-h-screen flex flex-col`}>
-        <Header />
-        <main className="flex-grow flex flex-col pt-[120px] lg:pt-[140px]">{children}</main>
-        <Footer />
-        <WhatsAppButton />
+      <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />
+      </head>
+      <body>
+        {children}
+
+        {/* Google Ads etiketi (canlı siteyle aynı) */}
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${site.googleAdsId}`} strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${site.googleAdsId}');
+gtag('event', 'conversion', {'send_to': '${site.googleAdsConversion}'});`}
+        </Script>
       </body>
     </html>
   );
