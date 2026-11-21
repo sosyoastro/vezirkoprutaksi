@@ -24,6 +24,7 @@ export default function Footer() {
                 <li><Link href="/#anasayfa">Ana Sayfa</Link></li>
                 <li><Link href="/#hakkimizda">Hakkımızda</Link></li>
                 <li><Link href="/#hizmetler">Hizmetlerimiz</Link></li>
+                <li><Link href="/seffaf-ucret-politikasi">Şeffaf Ücret Politikası</Link></li>
                 <li><Link href="/blog">Blog</Link></li>
                 <li><Link href="/#iletisim">İletişim</Link></li>
               </ul>

@@ -30,8 +30,22 @@ export const navItems = [
   { label: "Hakkımızda", href: "/#hakkimizda" },
   { label: "Hizmetler", href: "/#hizmetler" },
   { label: "İletişim", href: "/#iletisim" },
+  { label: "Şeffaf Ücret Politikası", href: "/seffaf-ucret-politikasi" },
   { label: "Blog", href: "/blog" },
 ];
+
+export const pricingPolicy = {
+  slug: "seffaf-ucret-politikasi",
+  title: "Şeffaf Ücret Politikası",
+  description:
+    "Vezirköprü Taksi'de ücretler resmî taksimetre tarifesiyle hesaplanır; uzun yolculuklarda fiyat yola çıkmadan önce bildirilir. Gizli ücret ve sürpriz ek maliyet yoktur.",
+  paragraphs: [
+    "Vezirköprü Taksi olarak yolculuklarınızda sürprizle karşılaşmamanız için şeffaf bir fiyatlandırma uyguluyoruz. Şehir içi yolculuklarda ücret, resmî taksimetre tarifesi üzerinden gidilen mesafeye göre hesaplanır. Taksimetre yolculuğun başında açılır ve yol boyunca ekranını her an görebileceğiniz şekilde durur. Yolculuk sonunda ödeyeceğiniz tutar, taksimetrede gördüğünüz tutardır; ücretin nasıl hesaplandığını şoförümüze dilediğiniz zaman sorabilirsiniz.",
+    "Köylere, Şahinkaya Kanyonu'na, Samsun veya Merzifon havalimanlarına ya da şehirler arası yapılacak uzun yolculuklarda ücreti yola çıkmadan önce sizinle netleştiriyoruz. Bizi aradığınızda gideceğiniz yeri söylemeniz yeterli; yaklaşık ücreti önceden bildiririz ve anlaştığımız fiyatın dışında bir ödeme talep etmeyiz.",
+    "Gizli ücret, sürpriz ek maliyet veya aşım ücreti yoktur. Kanyon gezisi gibi beklemeli yolculuklarda bekleme koşullarını da önceden konuşuruz. Böylece ne ödeyeceğinizi en baştan bilir, yolculuğunuzun tadını çıkarırsınız. Adil ve açık fiyatı, yolcularımızla kurduğumuz uzun soluklu güven ilişkisinin temeli olarak görüyoruz.",
+    "Fiyat bilgisi almak için günün her saati 0543 951 51 01 numarasından bize ulaşabilirsiniz.",
+  ],
+};
 
 export const slides = [
   {

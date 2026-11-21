@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { navItems, site } from "@/data/site";
 
-export default function Header({ active = "home" }: { active?: "home" | "blog" }) {
+export default function Header({ active = "home" }: { active?: "home" | "blog" | "ucret" }) {
   const [sticky, setSticky] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -65,7 +65,8 @@ export default function Header({ active = "home" }: { active?: "home" | "blog" }
               </li>
 
               {navItems.map((item, i) => {
-                const isActive = active === "blog" ? item.href === "/blog" : i === 0;
+                const activeHref = { home: navItems[0].href, blog: "/blog", ucret: "/seffaf-ucret-politikasi" }[active];
+                const isActive = item.href === activeHref && (active !== "home" || i === 0);
                 return (
                   <li key={item.href} className={`nav-item${isActive && isSub ? " nav-item--active" : ""}`}>
                     <Link href={item.href} onClick={close}>

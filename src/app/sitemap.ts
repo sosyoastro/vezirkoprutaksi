@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [...slides.map((s) => s.image), about.image, facts.bgImage, facts.fgImage, faq.image].map(abs),
     },
     {
+      url: `${site.url}/seffaf-ucret-politikasi`,
+      lastModified: new Date("2026-11-21"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
       url: `${site.url}/blog`,
       lastModified: latestPost ? new Date(latestPost) : new Date(),
       changeFrequency: "weekly",

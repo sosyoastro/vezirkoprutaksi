@@ -2834,3 +2834,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero başlık geçişi */
 #hero-title, #hero-desc { transition: opacity 0.3s ease; }
+/* 7 menü öğesinin dar masaüstü ekranlarda tek satıra sığması için */
+@media (min-width: 1025px) {
+    .header-main-bar .nav-item a { white-space: nowrap; }
+}
+@media (min-width: 1025px) and (max-width: 1240px) {
+    .header-main-bar .nav-menu { gap: 1.1rem; }
+    .header-main-bar .nav-item a { font-size: 0.88rem; }
+    .navbar-container { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
